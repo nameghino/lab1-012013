@@ -5,7 +5,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public class Item {
+public class Item implements Comparable<Item>{
 	private String tagName;
 	private String textValue;
 	private Map<String, String> attributes;
@@ -104,6 +104,12 @@ public class Item {
 		s += "</" + tagName + ">";
 
 		return s;
+	}
+
+	@Override
+	public int compareTo(Item o) {
+		int cr = this.getTagName().compareTo(o.getTagName());
+		return cr;
 	}
 
 }
