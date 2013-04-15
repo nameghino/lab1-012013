@@ -87,7 +87,7 @@ public class ParserCoreTesting {
 	@Test
 	public void simpleParseTest() {
 		Item i = new Item("tag1");
-		Parser p = new Parser();
+		Parser p = new BasicParser();
 		Item parsed = p.parse("<tag1/>");
 		assertEquals(i, parsed);
 	}
@@ -97,7 +97,7 @@ public class ParserCoreTesting {
 	public void valuedParseTest() {
 		Item i = new Item("tag1");
 		i.setTextValue("value1");
-		Parser p = new Parser();
+		Parser p = new BasicParser();
 		Item parsed = p.parse("<tag1>value1</tag1>");
 		assertEquals(i, parsed);
 	}
@@ -107,7 +107,7 @@ public class ParserCoreTesting {
 		Item root = new Item("tag1");
 		Item i = new Item("tag2", root);
 		i.setTextValue("value1");		
-		Parser p = new Parser();
+		Parser p = new BasicParser();
 		Item parsed = p.parse("<tag1><tag2>value1</tag2></tag1>");
 		assertEquals(i, parsed);
 	}
