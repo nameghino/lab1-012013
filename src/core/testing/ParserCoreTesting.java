@@ -64,7 +64,7 @@ public class ParserCoreTesting {
 		personLastNameElement.setTextValue("Ameghino");		
 		
 		assertEquals(
-				"<Person><FirstName>Nicolas</FirstName><LastName>Ameghino</LastName></Person>",
+				"<Person>\n<FirstName>Nicolas</FirstName>\n<LastName>Ameghino</LastName>\n</Person>",
 				personElement.toString()
 				);
 	}
@@ -81,11 +81,37 @@ public class ParserCoreTesting {
 		Item personB = new Item("Person", addressBook);
 		personB.setAttribute("firstName", "Martin");
 		personB.setAttribute("lastName", "Ameghino");
-		personB.setAttribute("phoneNumber", "+541155556666");
-		
-		System.out.println(addressBook.toString());
-		fail("#fafafa");
-		
+		personB.setAttribute("phoneNumber", "+541155556666");		
 	}
+	
+	@Test
+	public void simpleParseTest() {
+		Item i = new Item("tag1");
+		Parser p = new Parser();
+		Item parsed = p.parse("<tag1/>");
+		assertEquals(i, parsed);
+	}
+	
+	/*
+	@Test
+	public void valuedParseTest() {
+		Item i = new Item("tag1");
+		i.setTextValue("value1");
+		Parser p = new Parser();
+		Item parsed = p.parse("<tag1>value1</tag1>");
+		assertEquals(i, parsed);
+	}
+	
+	@Test
+	public void nestedTagParseTest() {
+		Item root = new Item("tag1");
+		Item i = new Item("tag2", root);
+		i.setTextValue("value1");		
+		Parser p = new Parser();
+		Item parsed = p.parse("<tag1><tag2>value1</tag2></tag1>");
+		assertEquals(i, parsed);
+	}
+	*/
+	
 
 }
