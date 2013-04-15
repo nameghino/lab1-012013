@@ -2,6 +2,8 @@ package core;
 
 import java.util.Stack;
 
+import java.util.regex.*;
+
 enum ParserState {
 	ParserStateVirgin,
 	ParserStateTagOpened,
@@ -30,29 +32,18 @@ public class Parser {
 		
 	private Stack<String> tagStack = new Stack<String>();
 	
-	public void parse(String s) {
-		this.parse(s, 0, s.length());
+	public Item parse(String s) {
+		return this.parse(s, 0, s.length(), null);
 	}
 	
-	public void parse(String s, int start) {
-		this.parse(s, start, s.length());
+	private Item parse(String s, int start) {
+		return this.parse(s, start, s.length(), null);
 	}
-
-	private void parse(String s, int start, int end) {		
-		if (end - start < 1) return;		
-		int tag_start = s.indexOf(TAG_OPENER, start);
-		int tag_end = s.indexOf(TAG_CLOSER, tag_start+1);
 	
-		String tag = s.substring(tag_start+1, tag_end);
-		if (tag.charAt(0) == TAG_FINALIZER) {
-			tagStack.pop();
-		} else {
-			tagStack.push(tag);
-		}
-		
-		System.out.println("Tag stack: " + tagStack);
-		
-		System.out.println(tag);
-		this.parse(s, tag_end+1);
+	
+	// Assuming as simplest possible tag:
+	// TAG_OPENER + TAG_FINALIZER + VALID_ENTITY_CHARACTERS_REGEXP_STRING{1} + TAG_CLOSER
+	private Item parse(String s, int start, int end, Item parent) {
+		return null;
 	}
 }
